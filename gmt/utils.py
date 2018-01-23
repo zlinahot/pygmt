@@ -6,7 +6,7 @@ from contextlib import contextmanager
 from tempfile import NamedTemporaryFile
 import numpy as np
 
-from .exceptions import GMTError
+from .exceptions import GMTError, GMTOptionError
 
 
 def data_kind(data, x, y):
@@ -265,3 +265,41 @@ class GMTTempFile():
 
         """
         return np.loadtxt(self.name, **kwargs)
+
+
+def check_at_least_one_option(markers, **kwargs):
+    """
+    Check if at least one option is specified.
+
+    >>> check_at_least_one_option('BLT', B="afg")
+    >>> check_at_least_one_option(['B', 'L', 'T'], B="afg")
+    >>> check_at_least_one_option('BLT', B="afg", L="testL", T="testT")
+    >>> check_at_least_one_option('BLT')
+    Traceback (most recent call last):
+        ...
+    gmt.exceptions.GMTOptionError: At least one of B, L or T must be specified.
+
+    """
+    status = [marker in kwargs for marker in markers]
+    if not any(status):
+        msg = ', '.join(markers[:-1]) + ' or ' + markers[-1]
+        raise GMTOptionError("At least one of {} "
+                             "must be specified.".format(msg))
+
+def check_must_option(markers, **kwargs):
+    """
+    Check if all options are specified.
+
+    >>> check_must_option('B', B="afg")
+    >>> check_must_option('BE', B="afg", E="testE")
+    >>> check_must_option('BE', B="afg")
+    Traceback (most recent call last):
+        ...
+    gmt.exceptions.GMTOptionError: Option B and E must be specified.
+
+    """
+    status = [marker in kwargs for marker in markers]
+    if not all(status):
+        msg = ', '.join(markers[:-1]) + ' and ' + markers[-1]
+        raise GMTOptionError("Option {} must be specified.".format(msg))
+

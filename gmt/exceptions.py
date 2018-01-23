@@ -19,6 +19,13 @@ class GMTOSError(GMTError):
     pass
 
 
+class GMTOptionError(GMTError):
+    """
+    Error of GMT options.
+    """
+    pass
+
+
 class GMTCLibError(GMTError):
     """
     Error encountered when running a function from the GMT shared library.
