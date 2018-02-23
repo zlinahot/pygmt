@@ -3,7 +3,9 @@ Base class with plot generating commands.
 Does not define any special non-GMT methods (savefig, show, etc).
 """
 from .clib import LibGMT
-from .utils import build_arg_string, dummy_context, data_kind
+from .utils import build_arg_string, dummy_context, data_kind, \
+    check_at_least_one_option, check_must_option, \
+    check_if_A_exists_then_B_must_option
 from .decorators import fmt_docstring, use_alias, kwargs_to_strings
 from .exceptions import GMTError
 
@@ -241,11 +243,8 @@ class BasePlotting():
 
         """
         kwargs = self._preprocess(**kwargs)
-        assert 'B' in kwargs or 'L' in kwargs or 'T' in kwargs, \
-            "At least one of B, L, or T must be specified."
-        if 'D' in kwargs:
-            assert 'F' in kwargs, \
-                "Option D requires F to be specified as well."
+        check_at_least_one_option('BLT', **kwargs)
+        check_if_A_exists_then_B_must_option('D', 'F', **kwargs)
         with LibGMT() as lib:
             lib.call_module('psbasemap', build_arg_string(kwargs))
 
@@ -280,6 +279,6 @@ class BasePlotting():
 
         """
         kwargs = self._preprocess(**kwargs)
-        assert 'D' in kwargs, "Option D is must be specified."
+        check_must_option('D', **kwargs)
         with LibGMT() as lib:
             lib.call_module('logo', build_arg_string(kwargs))

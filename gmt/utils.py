@@ -286,6 +286,7 @@ def check_at_least_one_option(markers, **kwargs):
         raise GMTOptionError("At least one of {} "
                              "must be specified.".format(msg))
 
+
 def check_must_option(markers, **kwargs):
     """
     Check if all options are specified.
@@ -303,3 +304,15 @@ def check_must_option(markers, **kwargs):
         msg = ', '.join(markers[:-1]) + ' and ' + markers[-1]
         raise GMTOptionError("Option {} must be specified.".format(msg))
 
+
+def check_if_A_exists_then_B_must_option(A, B, **kwargs):
+    """
+    B must be specified if A is specified.
+    """
+
+    if all([marker in kwargs for marker in A]):
+        if not all([marker in kwargs for marker in B]):
+            msg1 = ', '.join(A[:-1]) + ' and ' + A[-1]
+            msg2 = ', '.join(B[:-1]) + ' and ' + B[-1]
+            msg = "Option {} requires {} to be specified.".format(msg1, msg2)
+            raise GMTOptionError(msg)
