@@ -7,6 +7,8 @@ PYTEST_ARGS=--cov=$(PROJECT) --cov-config=../pyproject.toml \
 			--pyargs ${PYTEST_EXTRA}
 BLACK_FILES=$(PROJECT) setup.py doc/conf.py examples
 BLACKDOC_OPTIONS=--line-length 79
+DOCFORMATTER_FILES=$(PROJECT) setup.py doc/conf.py examples
+DOCFORMATTER_OPTIONS=--recursive --pre-summary-newline --wrap-summaries 79 --wrap-descriptions 79
 FLAKE8_FILES=$(PROJECT) setup.py doc/conf.py
 LINT_FILES=$(PROJECT) setup.py doc/conf.py
 
@@ -15,8 +17,8 @@ help:
 	@echo ""
 	@echo "  install   install in editable mode"
 	@echo "  test      run the test suite (including doctests) and report coverage"
-	@echo "  format    run black and blackdoc to automatically format the code"
-	@echo "  check     run code style and quality checks (black, blackdoc and flake8)"
+	@echo "  format    run black, blackdoc and docformatter to automatically format the code"
+	@echo "  check     run code style and quality checks (black, blackdoc, docformatter and flake8)"
 	@echo "  lint      run pylint for a deeper (and slower) quality check"
 	@echo "  clean     clean up build and generated files"
 	@echo ""
@@ -38,10 +40,12 @@ test:
 format:
 	black $(BLACK_FILES)
 	blackdoc $(BLACKDOC_OPTIONS) $(BLACK_FILES)
+	docformatter --in-place $(DOCFORMATTER_OPTIONS) $(DOCFORMATTER_FILES)
 
 check:
 	black --check $(BLACK_FILES)
 	blackdoc --check $(BLACKDOC_OPTIONS) $(BLACK_FILES)
+	docformatter --check $(DOCFORMATTER_OPTIONS) $(DOCFORMATTER_FILES)
 	flake8 $(FLAKE8_FILES)
 
 lint:

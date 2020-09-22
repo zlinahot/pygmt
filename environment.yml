@@ -20,6 +20,7 @@ dependencies:
     - coverage[toml]
     - black
     - blackdoc
+    - docformatter
     - pylint
     - flake8
     - sphinx=2.2.1
