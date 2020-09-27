@@ -1,0 +1,33 @@
+# This flow checks the links in markdown and HTML files
+name: Check links
+
+on:
+  # Uncomment the 'pull_request' line below to trigger the workflow in PR
+  pull_request:
+  # Schedule runs on 12 noon every Sunday
+  schedule:
+    - cron: '0 12 * * 0'
+
+jobs:
+  check_links:
+    name: Check links
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout current git repository to the "repository" diretory
+    - name: Checkout
+      uses: actions/checkout@v2.3.3
+      with:
+        path: repository
+
+    # Checkout gh-pages branch to the "documentation" directory
+    - name: Checkout gh-pages branch
+      uses: actions/checkout@v2.3.3
+      with:
+        ref: gh-pages
+        path: documentation
+
+    - name: Check links in plain-text and HTML files
+      uses: peter-evans/link-checker@v1
+      with:
+        args: -v -r repository/* documentation/dev/
