@@ -10,10 +10,10 @@ try:
 except ImportError:
     Image = None
 
-from .clib import Session
+from ..clib import Session
 from .base_plotting import BasePlotting
-from .exceptions import GMTError, GMTInvalidInput
-from .helpers import (
+from ..exceptions import GMTError, GMTInvalidInput
+from ..helpers import (
     build_arg_string,
     fmt_docstring,
     use_alias,
