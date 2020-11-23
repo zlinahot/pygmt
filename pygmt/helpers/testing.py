@@ -1,6 +1,4 @@
-"""
-Helper functions for testing.
-"""
+"""Helper functions for testing."""
 import inspect
 import os
 import string

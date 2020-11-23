@@ -1,6 +1,4 @@
-"""
-Test the functions that put matrix data into GMT.
-"""
+"""Test the functions that put matrix data into GMT."""
 import numpy as np
 import numpy.testing as npt
 import pytest
@@ -14,7 +12,7 @@ from ..helpers import GMTTempFile
 
 
 def test_put_matrix():
-    "Check that assigning a numpy 2d array to a dataset works"
+    """Check that assigning a numpy 2d array to a dataset works."""
     dtypes = "float32 float64 int32 int64 uint32 uint64".split()
     shape = (3, 4)
     for dtype in dtypes:
@@ -45,7 +43,7 @@ def test_put_matrix():
 
 
 def test_put_matrix_fails():
-    "Check that put_matrix raises an exception if return code is not zero"
+    """Check that put_matrix raises an exception if return code is not zero."""
     # It's hard to make put_matrix fail on the C API level because of all the
     # checks on input arguments. Mock the C API function just to make sure it
     # works.
@@ -56,7 +54,8 @@ def test_put_matrix_fails():
 
 
 def test_put_matrix_grid():
-    "Check that assigning a numpy 2d array to an ASCII and NetCDF grid works"
+    """Check that assigning a numpy 2d array to an ASCII and NetCDF grid
+    works."""
     dtypes = "float32 float64 int32 int64 uint32 uint64".split()
     wesn = [10, 15, 30, 40, 0, 0]
     inc = [1, 1]

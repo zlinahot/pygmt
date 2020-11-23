@@ -1,7 +1,5 @@
 # pylint: disable=redefined-outer-name
-"""
-Tests text
-"""
+"""Tests text."""
 import os
 
 import pytest
@@ -17,21 +15,19 @@ CITIES_DATA = os.path.join(TEST_DATA_DIR, "cities.txt")
 
 @pytest.fixture(scope="module")
 def projection():
-    "The projection system"
+    """The projection system."""
     return "x4i"
 
 
 @pytest.fixture(scope="module")
 def region():
-    "The data region"
+    """The data region."""
     return [0, 5, 0, 2.5]
 
 
 @pytest.mark.mpl_image_compare
 def test_text_single_line_of_text(region, projection):
-    """
-    Place a single line text of text at some x, y location
-    """
+    """Place a single line text of text at some x, y location."""
     fig = Figure()
     fig.text(
         region=region,
@@ -45,9 +41,7 @@ def test_text_single_line_of_text(region, projection):
 
 @pytest.mark.mpl_image_compare
 def test_text_multiple_lines_of_text(region, projection):
-    """
-    Place multiple lines of text at their respective x, y locations
-    """
+    """Place multiple lines of text at their respective x, y locations."""
     fig = Figure()
     fig.text(
         region=region,
@@ -60,9 +54,7 @@ def test_text_multiple_lines_of_text(region, projection):
 
 
 def test_text_without_text_input(region, projection):
-    """
-    Run text by passing in x and y, but no text
-    """
+    """Run text by passing in x and y, but no text."""
     fig = Figure()
     with pytest.raises(GMTInvalidInput):
         fig.text(region=region, projection=projection, x=1.2, y=2.4)
@@ -70,9 +62,7 @@ def test_text_without_text_input(region, projection):
 
 @pytest.mark.mpl_image_compare
 def test_text_input_single_filename():
-    """
-    Run text by passing in one filename to textfiles
-    """
+    """Run text by passing in one filename to textfiles."""
     fig = Figure()
     fig.text(region=[10, 70, -5, 10], textfiles=POINTS_DATA)
     return fig
@@ -80,9 +70,7 @@ def test_text_input_single_filename():
 
 @pytest.mark.mpl_image_compare
 def test_text_input_remote_filename():
-    """
-    Run text by passing in a remote filename to textfiles
-    """
+    """Run text by passing in a remote filename to textfiles."""
     fig = Figure()
     fig.text(region=[0, 6.5, 0, 6.5], textfiles="@Table_5_11.txt")
     return fig
@@ -90,18 +78,15 @@ def test_text_input_remote_filename():
 
 @pytest.mark.mpl_image_compare
 def test_text_input_multiple_filenames():
-    """
-    Run text by passing in multiple filenames to textfiles
-    """
+    """Run text by passing in multiple filenames to textfiles."""
     fig = Figure()
     fig.text(region=[10, 70, -30, 10], textfiles=[POINTS_DATA, CITIES_DATA])
     return fig
 
 
 def test_text_nonexistent_filename():
-    """
-    Run text by passing in a list of filenames with one that does not exist
-    """
+    """Run text by passing in a list of filenames with one that does not
+    exist."""
     fig = Figure()
     with pytest.raises(GMTCLibError):
         fig.text(region=[10, 70, -5, 10], textfiles=[POINTS_DATA, "notexist.txt"])
@@ -109,10 +94,8 @@ def test_text_nonexistent_filename():
 
 @pytest.mark.mpl_image_compare
 def test_text_position(region):
-    """
-    Print text at center middle (CM) and eight other positions
-    (Top/Middle/Bottom x Left/Centre/Right).
-    """
+    """Print text at center middle (CM) and eight other positions
+    (Top/Middle/Bottom x Left/Centre/Right)."""
     fig = Figure()
     fig.text(region=region, projection="x1c", frame="a", position="CM", text="C M")
     for position in ("TL", "TC", "TR", "ML", "MR", "BL", "BC", "BR"):
@@ -121,9 +104,7 @@ def test_text_position(region):
 
 
 def test_text_xy_with_position_fails(region):
-    """
-    Run text by providing both x/y pairs and position arguments.
-    """
+    """Run text by providing both x/y pairs and position arguments."""
     fig = Figure()
     with pytest.raises(GMTInvalidInput):
         fig.text(
@@ -133,11 +114,9 @@ def test_text_xy_with_position_fails(region):
 
 @pytest.mark.mpl_image_compare
 def test_text_position_offset_with_line(region):
-    """
-    Print text at centre middle (CM) and eight other positions
+    """Print text at centre middle (CM) and eight other positions
     (Top/Middle/Bottom x Left/Centre/Right), offset by 0.5 cm, with a line
-    drawn from the original to the shifted point.
-    """
+    drawn from the original to the shifted point."""
     fig = Figure()
     fig.text(region=region, projection="x1c", frame="a", position="CM", text="C M")
     for position in ("TL", "TC", "TR", "ML", "MR", "BL", "BC", "BR"):
@@ -147,9 +126,7 @@ def test_text_position_offset_with_line(region):
 
 @pytest.mark.mpl_image_compare
 def test_text_angle_30(region, projection):
-    """
-    Print text at 30 degrees counter-clockwise from horizontal
-    """
+    """Print text at 30 degrees counter-clockwise from horizontal."""
     fig = Figure()
     fig.text(
         region=region,
@@ -164,9 +141,7 @@ def test_text_angle_30(region, projection):
 
 @pytest.mark.mpl_image_compare
 def test_text_font_bold(region, projection):
-    """
-    Print text with a bold font
-    """
+    """Print text with a bold font."""
     fig = Figure()
     fig.text(
         region=region,
@@ -181,9 +156,7 @@ def test_text_font_bold(region, projection):
 
 @pytest.mark.mpl_image_compare
 def test_text_fill(region, projection):
-    """
-    Print text with blue color fill
-    """
+    """Print text with blue color fill."""
     fig = Figure()
     fig.text(
         region=region,
@@ -198,9 +171,7 @@ def test_text_fill(region, projection):
 
 @pytest.mark.mpl_image_compare
 def test_text_pen(region, projection):
-    """
-    Print text with thick green dashed pen
-    """
+    """Print text with thick green dashed pen."""
     fig = Figure()
     fig.text(
         region=region,
@@ -215,9 +186,7 @@ def test_text_pen(region, projection):
 
 @pytest.mark.mpl_image_compare
 def test_text_round_clearance(region, projection):
-    """
-    Print text with round rectangle box clearance
-    """
+    """Print text with round rectangle box clearance."""
     fig = Figure()
     fig.text(
         region=region,
@@ -233,9 +202,7 @@ def test_text_round_clearance(region, projection):
 
 @pytest.mark.mpl_image_compare
 def test_text_justify_bottom_right_and_top_left(region, projection):
-    """
-    Print text justified at bottom right and top left
-    """
+    """Print text justified at bottom right and top left."""
     fig = Figure()
     fig.text(
         region=region,
@@ -260,7 +227,9 @@ def test_text_justify_bottom_right_and_top_left(region, projection):
 def test_text_justify_parsed_from_textfile():
     """
     Print text justified based on a column from textfile, using justify=True
-    boolean operation. Loosely based on "All great-circle paths lead to Rome"
+    boolean operation.
+
+    Loosely based on "All great-circle paths lead to Rome"
     gallery example at
     https://gmt.soest.hawaii.edu/doc/latest/gallery/ex23.html
     """
@@ -277,10 +246,8 @@ def test_text_justify_parsed_from_textfile():
 
 @pytest.mark.mpl_image_compare
 def test_text_angle_font_justify_from_textfile():
-    """
-    Print text with x, y, angle, font, justify, and text arguments parsed from
-    the textfile.
-    """
+    """Print text with x, y, angle, font, justify, and text arguments parsed
+    from the textfile."""
     fig = Figure()
     with GMTTempFile(suffix=".txt") as tempfile:
         with open(tempfile.name, "w") as tmpfile:

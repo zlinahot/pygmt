@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Sphinx documentation configuration file.
-"""
+"""Sphinx documentation configuration file."""
 # pylint: disable=invalid-name
 
 import datetime

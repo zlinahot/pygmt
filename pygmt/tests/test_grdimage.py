@@ -1,6 +1,4 @@
-"""
-Test Figure.grdimage
-"""
+"""Test Figure.grdimage."""
 import sys
 import numpy as np
 import pytest
@@ -18,15 +16,13 @@ with clib.Session() as _lib:
 
 @pytest.fixture(scope="module", name="grid")
 def fixture_grid():
-    "Load the grid data from the sample earth_relief file"
+    """Load the grid data from the sample earth_relief file."""
     return load_earth_relief(registration="gridline")
 
 
 @pytest.fixture(scope="module", name="xrgrid")
 def fixture_xrgrid():
-    """
-    Create a sample xarray.DataArray grid for testing
-    """
+    """Create a sample xarray.DataArray grid for testing."""
     longitude = np.arange(0, 360, 1)
     latitude = np.arange(-89, 90, 1)
     x = np.sin(np.deg2rad(longitude))
@@ -45,7 +41,7 @@ def fixture_xrgrid():
 
 @pytest.mark.mpl_image_compare
 def test_grdimage(grid):
-    "Plot an image using an xarray grid"
+    """Plot an image using an xarray grid."""
     fig = Figure()
     fig.grdimage(grid, cmap="earth", projection="W0/6i")
     return fig
@@ -53,7 +49,7 @@ def test_grdimage(grid):
 
 @pytest.mark.mpl_image_compare
 def test_grdimage_slice(grid):
-    "Plot an image using an xarray grid that has been sliced"
+    """Plot an image using an xarray grid that has been sliced."""
     grid_ = grid.sel(lat=slice(-30, 30))
     fig = Figure()
     fig.grdimage(grid_, cmap="earth", projection="M6i")
@@ -62,7 +58,7 @@ def test_grdimage_slice(grid):
 
 @pytest.mark.mpl_image_compare
 def test_grdimage_file():
-    "Plot an image using file input"
+    """Plot an image using file input."""
     fig = Figure()
     fig.grdimage(
         "@earth_relief_01d_g",
@@ -112,7 +108,7 @@ def test_grdimage_shading_xarray(grid, shading):
 
 
 def test_grdimage_fails():
-    "Should fail for unrecognized input"
+    """Should fail for unrecognized input."""
     fig = Figure()
     with pytest.raises(GMTInvalidInput):
         fig.grdimage(np.arange(20).reshape((4, 5)))
@@ -122,6 +118,7 @@ def test_grdimage_fails():
 def test_grdimage_over_dateline(xrgrid):
     """
     Ensure no gaps are plotted over the 180 degree international dateline.
+
     Specifically checking that `xrgrid.gmt.gtype = 1` sets `GMT_GRID_IS_GEO`,
     and that `xrgrid.gmt.registration = 0` sets `GMT_GRID_NODE_REG`. Note that
     there would be a gap over the dateline if a pixel registered grid is used.
@@ -138,10 +135,8 @@ def test_grdimage_over_dateline(xrgrid):
 @pytest.mark.parametrize("lon0", [0, 123, 180])
 @pytest.mark.parametrize("proj_type", ["H", "W"])
 def test_grdimage_central_meridians(grid, proj_type, lon0):
-    """
-    Test that plotting a grid with different central meridians (lon0) using
-    Hammer (H) and Mollweide (W) projection systems work.
-    """
+    """Test that plotting a grid with different central meridians (lon0) using
+    Hammer (H) and Mollweide (W) projection systems work."""
     fig_ref, fig_test = Figure(), Figure()
     fig_ref.grdimage(
         "@earth_relief_01d_g", projection=f"{proj_type}{lon0}/15c", cmap="geo"
@@ -159,11 +154,9 @@ def test_grdimage_central_meridians(grid, proj_type, lon0):
 @pytest.mark.parametrize("lon0", [0, 123, 180])
 @pytest.mark.parametrize("proj_type", [pytest.param("Q", marks=pytest.mark.xfail), "S"])
 def test_grdimage_central_meridians_and_standard_parallels(grid, proj_type, lon0, lat0):
-    """
-    Test that plotting a grid with different central meridians (lon0) and
+    """Test that plotting a grid with different central meridians (lon0) and
     standard_parallels (lat0) using Cylindrical Equidistant (Q) and General
-    Stereographic (S) projection systems work.
-    """
+    Stereographic (S) projection systems work."""
     fig_ref, fig_test = Figure(), Figure()
     fig_ref.grdimage(
         "@earth_relief_01d_g", projection=f"{proj_type}{lon0}/{lat0}/15c", cmap="geo"

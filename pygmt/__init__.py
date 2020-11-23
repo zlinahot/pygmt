@@ -163,7 +163,6 @@ def test(doctest=True, verbose=True, coverage=False, figures=True):
     AssertionError
         If pytest returns a non-zero error code indicating that some tests have
         failed.
-
     """
     import pytest
 

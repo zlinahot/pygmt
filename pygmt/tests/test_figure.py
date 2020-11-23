@@ -1,7 +1,5 @@
-"""
-Test the behaviors of the Figure class
-Doesn't include the plotting commands, which have their own test files.
-"""
+"""Test the behaviors of the Figure class Doesn't include the plotting
+commands, which have their own test files."""
 import os
 
 import numpy as np
@@ -13,7 +11,7 @@ from ..exceptions import GMTInvalidInput
 
 
 def test_figure_region():
-    "Extract the plot region for the figure"
+    """Extract the plot region for the figure."""
     region = [0, 1, 2, 3]
     fig = Figure()
     fig.basemap(region=region, projection="X1id/1id", frame=True)
@@ -21,7 +19,7 @@ def test_figure_region():
 
 
 def test_figure_region_multiple():
-    "Make sure the region argument is for the current figure"
+    """Make sure the region argument is for the current figure."""
     region1 = [-10, 2, 0.355, 67]
     fig1 = Figure()
     fig1.basemap(region=region1, projection="X1id/1id", frame=True)
@@ -34,7 +32,7 @@ def test_figure_region_multiple():
 
 
 def test_figure_region_country_codes():
-    "Extract the plot region for the figure using country codes"
+    """Extract the plot region for the figure using country codes."""
     fig = Figure()
     fig.basemap(region="JP", projection="M3i", frame=True)
     npt.assert_allclose(
@@ -46,7 +44,7 @@ def test_figure_region_country_codes():
 
 
 def test_figure_savefig_exists():
-    "Make sure the saved figure has the right name"
+    """Make sure the saved figure has the right name."""
     fig = Figure()
     fig.basemap(region="10/70/-300/800", projection="X3i/5i", frame="af")
     prefix = "test_figure_savefig_exists"
@@ -58,7 +56,7 @@ def test_figure_savefig_exists():
 
 
 def test_figure_savefig_transparent():
-    "Check if fails when transparency is not supported"
+    """Check if fails when transparency is not supported."""
     fig = Figure()
     fig.basemap(region="10/70/-300/800", projection="X3i/5i", frame="af")
     prefix = "test_figure_savefig_transparent"
@@ -74,11 +72,11 @@ def test_figure_savefig_transparent():
 
 
 def test_figure_savefig():
-    "Check if the arguments being passed to psconvert are correct"
+    """Check if the arguments being passed to psconvert are correct."""
     kwargs_saved = []
 
     def mock_psconvert(*args, **kwargs):  # pylint: disable=unused-argument
-        "Just record the arguments"
+        """Just record the arguments."""
         kwargs_saved.append(kwargs)
 
     fig = Figure()
@@ -110,7 +108,8 @@ def test_figure_savefig():
 
 
 def test_figure_show():
-    "Test that show creates the correct file name and deletes the temp dir"
+    """Test that show creates the correct file name and deletes the temp
+    dir."""
     fig = Figure()
     fig.basemap(region="10/70/-300/800", projection="X3i/5i", frame="af")
     img = fig.show(width=800)
@@ -119,7 +118,7 @@ def test_figure_show():
 
 @pytest.mark.mpl_image_compare
 def test_shift_origin():
-    "Test if fig.shift_origin works"
+    """Test if fig.shift_origin works."""
     fig = Figure()
     # First call shift_origin without projection and region.
     # Test the issue https://github.com/GenericMappingTools/pygmt/issues/514

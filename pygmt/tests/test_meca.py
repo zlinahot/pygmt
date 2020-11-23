@@ -1,6 +1,4 @@
-"""
-Tests for meca
-"""
+"""Tests for meca."""
 import os
 import pandas as pd
 import numpy as np
@@ -15,10 +13,8 @@ TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 @pytest.mark.mpl_image_compare
 def test_meca_spec_dictionary():
-    """
-    Test supplying a dictionary containing a single focal mechanism to the
-    `spec` argument.
-    """
+    """Test supplying a dictionary containing a single focal mechanism to the
+    `spec` argument."""
 
     fig = Figure()
 
@@ -39,10 +35,8 @@ def test_meca_spec_dictionary():
 
 @pytest.mark.mpl_image_compare
 def test_meca_spec_dict_list():
-    """
-    Test supplying a dictionary containing a list of focal mechanism to the
-    `spec` argument.
-    """
+    """Test supplying a dictionary containing a list of focal mechanism to the
+    `spec` argument."""
 
     fig = Figure()
 
@@ -66,10 +60,8 @@ def test_meca_spec_dict_list():
 
 @pytest.mark.mpl_image_compare
 def test_meca_spec_dataframe():
-    """
-    Test supplying a pandas DataFrame containing focal mechanisms and
-    locations to the `spec` argument.
-    """
+    """Test supplying a pandas DataFrame containing focal mechanisms and
+    locations to the `spec` argument."""
 
     fig = Figure()
 
@@ -92,10 +84,8 @@ def test_meca_spec_dataframe():
 
 @pytest.mark.mpl_image_compare
 def test_meca_spec_1d_array():
-    """
-    Test supplying a 1D numpy array containing focal mechanisms and
-    locations to the `spec` argument.
-    """
+    """Test supplying a 1D numpy array containing focal mechanisms and
+    locations to the `spec` argument."""
 
     fig = Figure()
 
@@ -134,10 +124,8 @@ def test_meca_spec_1d_array():
 
 @pytest.mark.mpl_image_compare
 def test_meca_spec_2d_array():
-    """
-    Test supplying a 2D numpy array containing focal mechanisms and
-    locations to the `spec` argument.
-    """
+    """Test supplying a 2D numpy array containing focal mechanisms and
+    locations to the `spec` argument."""
 
     fig = Figure()
 
@@ -178,10 +166,8 @@ def test_meca_spec_2d_array():
 
 @pytest.mark.mpl_image_compare
 def test_meca_spec_file():
-    """
-    Test supplying a file containing focal mechanisms and locations to the
-    `spec` argument.
-    """
+    """Test supplying a file containing focal mechanisms and locations to the
+    `spec` argument."""
 
     fig = Figure()
 
@@ -206,10 +192,8 @@ def test_meca_spec_file():
 
 @pytest.mark.mpl_image_compare
 def test_meca_loc_array():
-    """
-    Test supplying lists and np.ndarrays as the event location (longitude,
-    latitude, and depth).
-    """
+    """Test supplying lists and np.ndarrays as the event location (longitude,
+    latitude, and depth)."""
 
     fig = Figure()
 

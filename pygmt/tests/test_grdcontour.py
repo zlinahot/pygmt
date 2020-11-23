@@ -1,6 +1,4 @@
-"""
-Test Figure.grdcontour
-"""
+"""Test Figure.grdcontour."""
 import os
 
 import numpy as np
@@ -18,15 +16,14 @@ TEST_CONTOUR_FILE = os.path.join(TEST_DATA_DIR, "contours.txt")
 
 @pytest.fixture(scope="module", name="grid")
 def fixture_grid():
-    "Load the grid data from the sample earth_relief file"
+    """Load the grid data from the sample earth_relief file."""
     return load_earth_relief(registration="gridline")
 
 
 @check_figures_equal()
 def test_grdcontour(grid):
-    """Plot a contour image using an xarray grid
-    with fixed contour interval
-    """
+    """Plot a contour image using an xarray grid with fixed contour
+    interval."""
     fig_ref, fig_test = Figure(), Figure()
     kwargs = dict(interval="1000", projection="W0/6i")
     fig_ref.grdcontour("@earth_relief_01d_g", **kwargs)
@@ -36,9 +33,8 @@ def test_grdcontour(grid):
 
 @check_figures_equal()
 def test_grdcontour_labels(grid):
-    """Plot a contour image using a xarray grid
-    with contour labels and alternate colors
-    """
+    """Plot a contour image using a xarray grid with contour labels and
+    alternate colors."""
     fig_ref, fig_test = Figure(), Figure()
     kwargs = dict(
         interval="1000",
@@ -54,7 +50,7 @@ def test_grdcontour_labels(grid):
 
 @check_figures_equal()
 def test_grdcontour_slice(grid):
-    "Plot an contour image using an xarray grid that has been sliced"
+    """Plot an contour image using an xarray grid that has been sliced."""
 
     fig_ref, fig_test = Figure(), Figure()
 
@@ -69,7 +65,7 @@ def test_grdcontour_slice(grid):
 
 @pytest.mark.mpl_image_compare
 def test_grdcontour_file():
-    "Plot a contour image using grid file input"
+    """Plot a contour image using grid file input."""
     fig = Figure()
     fig.grdcontour(
         "@earth_relief_01d_g",
@@ -84,7 +80,7 @@ def test_grdcontour_file():
 
 @check_figures_equal()
 def test_grdcontour_interval_file_full_opts():
-    """ Plot based on external contour level file """
+    """Plot based on external contour level file."""
     fig_ref, fig_test = Figure(), Figure()
     # Use single-character arguments for the reference image
     comargs_ref = {
@@ -115,7 +111,7 @@ def test_grdcontour_interval_file_full_opts():
 
 
 def test_grdcontour_fails():
-    "Should fail for unrecognized input"
+    """Should fail for unrecognized input."""
     fig = Figure()
     with pytest.raises(GMTInvalidInput):
         fig.grdcontour(np.arange(20).reshape((4, 5)))

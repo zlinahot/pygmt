@@ -1,6 +1,4 @@
-"""
-GMT supplementary X2SYS module for crossover analysis.
-"""
+"""GMT supplementary X2SYS module for crossover analysis."""
 import contextlib
 import os
 from pathlib import Path

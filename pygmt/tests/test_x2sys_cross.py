@@ -1,7 +1,5 @@
 # pylint: disable=unused-argument
-"""
-Tests for x2sys_cross
-"""
+"""Tests for x2sys_cross."""
 import os
 from tempfile import TemporaryDirectory
 
@@ -18,28 +16,22 @@ from ..helpers import data_kind
 
 @pytest.fixture(name="mock_x2sys_home")
 def fixture_mock_x2sys_home(monkeypatch):
-    """
-    Set the X2SYS_HOME environment variable to the current working directory
-    for the test session
-    """
+    """Set the X2SYS_HOME environment variable to the current working directory
+    for the test session."""
     monkeypatch.setenv("X2SYS_HOME", os.getcwd())
 
 
 @pytest.fixture(scope="module", name="tracks")
 def fixture_tracks():
-    """
-    Load track data from the sample bathymetry file
-    """
+    """Load track data from the sample bathymetry file."""
     dataframe = load_sample_bathymetry()
     dataframe.columns = ["x", "y", "z"]  # longitude, latitude, bathymetry
     return [dataframe.query(expr="z > -20")]  # reduce size of dataset
 
 
 def test_x2sys_cross_input_file_output_file(mock_x2sys_home):
-    """
-    Run x2sys_cross by passing in a filename, and output internal crossovers to
-    an ASCII txt file
-    """
+    """Run x2sys_cross by passing in a filename, and output internal crossovers
+    to an ASCII txt file."""
     with TemporaryDirectory(prefix="X2SYS", dir=os.getcwd()) as tmpdir:
         tag = os.path.basename(tmpdir)
         x2sys_init(tag=tag, fmtfile="xyz", force=True)
@@ -56,10 +48,8 @@ def test_x2sys_cross_input_file_output_file(mock_x2sys_home):
 
 
 def test_x2sys_cross_input_file_output_dataframe(mock_x2sys_home):
-    """
-    Run x2sys_cross by passing in a filename, and output internal crossovers to
-    a pandas.DataFrame
-    """
+    """Run x2sys_cross by passing in a filename, and output internal crossovers
+    to a pandas.DataFrame."""
     with TemporaryDirectory(prefix="X2SYS", dir=os.getcwd()) as tmpdir:
         tag = os.path.basename(tmpdir)
         x2sys_init(tag=tag, fmtfile="xyz", force=True)
@@ -75,10 +65,8 @@ def test_x2sys_cross_input_file_output_dataframe(mock_x2sys_home):
 
 
 def test_x2sys_cross_input_dataframe_output_dataframe(mock_x2sys_home, tracks):
-    """
-    Run x2sys_cross by passing in one dataframe, and output external crossovers
-    to a pandas.DataFrame.
-    """
+    """Run x2sys_cross by passing in one dataframe, and output external
+    crossovers to a pandas.DataFrame."""
     with TemporaryDirectory(prefix="X2SYS", dir=os.getcwd()) as tmpdir:
         tag = os.path.basename(tmpdir)
         x2sys_init(tag=tag, fmtfile="xyz", force=True)
@@ -97,10 +85,8 @@ def test_x2sys_cross_input_dataframe_output_dataframe(mock_x2sys_home, tracks):
 
 
 def test_x2sys_cross_input_two_dataframes(mock_x2sys_home):
-    """
-    Run x2sys_cross by passing in two pandas.DataFrame tables with a time
-    column, and output external crossovers to a pandas.DataFrame
-    """
+    """Run x2sys_cross by passing in two pandas.DataFrame tables with a time
+    column, and output external crossovers to a pandas.DataFrame."""
     with TemporaryDirectory(prefix="X2SYS", dir=os.getcwd()) as tmpdir:
         tag = os.path.basename(tmpdir)
         x2sys_init(
@@ -131,10 +117,8 @@ def test_x2sys_cross_input_two_dataframes(mock_x2sys_home):
 
 
 def test_x2sys_cross_input_two_filenames(mock_x2sys_home):
-    """
-    Run x2sys_cross by passing in two filenames, and output external crossovers
-    to a pandas.DataFrame
-    """
+    """Run x2sys_cross by passing in two filenames, and output external
+    crossovers to a pandas.DataFrame."""
     with TemporaryDirectory(prefix="X2SYS", dir=os.getcwd()) as tmpdir:
         tag = os.path.basename(tmpdir)
         x2sys_init(tag=tag, fmtfile="xyz", force=True)
@@ -160,10 +144,8 @@ def test_x2sys_cross_input_two_filenames(mock_x2sys_home):
 
 
 def test_x2sys_cross_invalid_tracks_input_type(tracks):
-    """
-    Run x2sys_cross using tracks input that is not a pandas.DataFrame (matrix)
-    or str (file) type, which would raise a GMTInvalidInput error.
-    """
+    """Run x2sys_cross using tracks input that is not a pandas.DataFrame
+    (matrix) or str (file) type, which would raise a GMTInvalidInput error."""
     invalid_tracks = tracks[0].to_xarray().z
     assert data_kind(invalid_tracks) == "grid"
     with pytest.raises(GMTInvalidInput):
@@ -171,10 +153,8 @@ def test_x2sys_cross_invalid_tracks_input_type(tracks):
 
 
 def test_x2sys_cross_region_interpolation_numpoints(mock_x2sys_home):
-    """
-    Test that x2sys_cross's region (R), interpolation (l) and numpoints (W)
-    arguments work.
-    """
+    """Test that x2sys_cross's region (R), interpolation (l) and numpoints (W)
+    arguments work."""
     with TemporaryDirectory(prefix="X2SYS", dir=os.getcwd()) as tmpdir:
         tag = os.path.basename(tmpdir)
         x2sys_init(tag=tag, fmtfile="xyz", force=True)
@@ -195,9 +175,7 @@ def test_x2sys_cross_region_interpolation_numpoints(mock_x2sys_home):
 
 
 def test_x2sys_cross_trackvalues(mock_x2sys_home):
-    """
-    Test that x2sys_cross's trackvalues (Z) argument work.
-    """
+    """Test that x2sys_cross's trackvalues (Z) argument work."""
     with TemporaryDirectory(prefix="X2SYS", dir=os.getcwd()) as tmpdir:
         tag = os.path.basename(tmpdir)
         x2sys_init(tag=tag, fmtfile="xyz", force=True)

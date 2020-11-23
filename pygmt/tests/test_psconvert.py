@@ -1,15 +1,11 @@
-"""
-Tests psconvert.
-"""
+"""Tests psconvert."""
 import os
 
 from .. import Figure
 
 
 def test_psconvert():
-    """
-    psconvert creates a figure in the current directory.
-    """
+    """psconvert creates a figure in the current directory."""
     fig = Figure()
     fig.basemap(R="10/70/-3/8", J="X4i/3i", B="a")
     prefix = "test_psconvert"
@@ -20,9 +16,7 @@ def test_psconvert():
 
 
 def test_psconvert_twice():
-    """
-    Call psconvert twice to get two figures.
-    """
+    """Call psconvert twice to get two figures."""
     fig = Figure()
     fig.basemap(R="10/70/-3/8", J="X4i/3i", B="a")
     prefix = "test_psconvert_twice"
@@ -39,9 +33,7 @@ def test_psconvert_twice():
 
 
 def test_psconvert_int_options():
-    """
-    psconvert handles integer options well.
-    """
+    """psconvert handles integer options well."""
     fig = Figure()
     fig.basemap(R="10/70/-3/8", J="X4i/3i", B="a")
     prefix = "test_psconvert_int_options"
@@ -51,9 +43,7 @@ def test_psconvert_int_options():
 
 
 def test_psconvert_aliases():
-    """
-    Use the aliases to make sure they work.
-    """
+    """Use the aliases to make sure they work."""
     fig = Figure()
     fig.basemap(R="10/70/-3/8", J="X4i/3i", B="a")
     prefix = "test_psconvert_aliases"

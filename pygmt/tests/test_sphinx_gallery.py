@@ -1,6 +1,4 @@
-"""
-Test the sphinx-gallery scraper and code required to make it work.
-"""
+"""Test the sphinx-gallery scraper and code required to make it work."""
 import os
 from tempfile import TemporaryDirectory
 import pytest
@@ -16,7 +14,8 @@ from ..sphinx_gallery import PyGMTScraper
 
 @pytest.mark.skipif(sphinx_gallery is None, reason="requires sphinx-gallery")
 def test_pygmtscraper():
-    "Make sure the scraper finds the figures and removes them from the pool."
+    """Make sure the scraper finds the figures and removes them from the
+    pool."""
 
     showed = SHOWED_FIGURES.copy()
     for _ in range(len(SHOWED_FIGURES)):

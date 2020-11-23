@@ -1,6 +1,4 @@
-"""
-Modern mode session management modules.
-"""
+"""Modern mode session management modules."""
 from .clib import Session
 
 

@@ -1,6 +1,4 @@
-"""
-Tests the helper functions/classes/etc used in wrapping GMT
-"""
+"""Tests the helper functions/classes/etc used in wrapping GMT."""
 import os
 
 import pytest
@@ -22,29 +20,29 @@ from ..exceptions import GMTInvalidInput
     ],
 )
 def test_data_kind_fails(data, x, y):
-    "Make sure data_kind raises exceptions when it should"
+    """Make sure data_kind raises exceptions when it should."""
     with pytest.raises(GMTInvalidInput):
         data_kind(data=data, x=x, y=y)
 
 
 def test_unique_name():
-    "Make sure the names are really unique"
+    """Make sure the names are really unique."""
     names = [unique_name() for i in range(100)]
     assert len(names) == len(set(names))
 
 
 def test_kwargs_to_strings_fails():
-    "Make sure it fails for invalid conversion types."
+    """Make sure it fails for invalid conversion types."""
     with pytest.raises(GMTInvalidInput):
         kwargs_to_strings(bla="blablabla")
 
 
 def test_kwargs_to_strings_no_bools():
-    "Test that not converting bools works"
+    """Test that not converting bools works."""
 
     @kwargs_to_strings(convert_bools=False)
     def my_module(**kwargs):
-        "Function that does nothing"
+        """Function that does nothing."""
         return kwargs
 
     # The module should return the exact same arguments it was given
@@ -53,7 +51,7 @@ def test_kwargs_to_strings_no_bools():
 
 
 def test_gmttempfile():
-    "Check that file is really created and deleted."
+    """Check that file is really created and deleted."""
     with GMTTempFile() as tmpfile:
         assert os.path.exists(tmpfile.name)
     # File should be deleted when leaving the with block
@@ -61,7 +59,7 @@ def test_gmttempfile():
 
 
 def test_gmttempfile_unique():
-    "Check that generating multiple files creates unique names"
+    """Check that generating multiple files creates unique names."""
     with GMTTempFile() as tmp1:
         with GMTTempFile() as tmp2:
             with GMTTempFile() as tmp3:
@@ -69,7 +67,8 @@ def test_gmttempfile_unique():
 
 
 def test_gmttempfile_prefix_suffix():
-    "Make sure the prefix and suffix of temporary files are user specifiable"
+    """Make sure the prefix and suffix of temporary files are user
+    specifiable."""
     with GMTTempFile() as tmpfile:
         assert os.path.basename(tmpfile.name).startswith("pygmt-")
         assert os.path.basename(tmpfile.name).endswith(".txt")
@@ -85,7 +84,7 @@ def test_gmttempfile_prefix_suffix():
 
 
 def test_gmttempfile_read():
-    "Make sure GMTTempFile.read() works"
+    """Make sure GMTTempFile.read() works."""
     with GMTTempFile() as tmpfile:
         with open(tmpfile.name, "w") as ftmp:
             ftmp.write("in.dat: N = 2\t<1/3>\t<2/4>\n")

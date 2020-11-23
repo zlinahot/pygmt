@@ -1,6 +1,4 @@
-"""
-Tests for gmt config
-"""
+"""Tests for gmt config."""
 import pytest
 
 from .. import Figure, config
@@ -8,9 +6,7 @@ from .. import Figure, config
 
 @pytest.mark.mpl_image_compare
 def test_config():
-    """
-    Test if config works globally and locally.
-    """
+    """Test if config works globally and locally."""
     fig = Figure()
     # Change global settings of current figure
     config(FONT_ANNOT_PRIMARY="blue")
@@ -44,7 +40,9 @@ def test_config():
 def test_config_font_one():
     """
     Test that setting `FONT` config changes all `FONT_*` settings except
-    `FONT_LOGO`. Specifically, this test only checks that `FONT_ANNOT_PRIMARY`,
+    `FONT_LOGO`.
+
+    Specifically, this test only checks that `FONT_ANNOT_PRIMARY`,
     `FONT_ANNOT_SECONDARY`, `FONT_LABEL`, and `FONT_TITLE` are modified.
     """
     fig = Figure()
@@ -59,10 +57,8 @@ def test_config_font_one():
 )
 @pytest.mark.mpl_image_compare
 def test_config_font_annot():
-    """
-    Test that setting `FONT_ANNOT` config changes both `FONT_ANNOT_PRIMARY` and
-    `FONT_ANNOT_SECONDARY`.
-    """
+    """Test that setting `FONT_ANNOT` config changes both `FONT_ANNOT_PRIMARY`
+    and `FONT_ANNOT_SECONDARY`."""
     fig = Figure()
     with config(FONT_ANNOT="6p,red"):
         fig.basemap(region=[0, 9, 0, 9], projection="C3/3/9c", T="mjTL+w4c+d4.5")
@@ -72,10 +68,8 @@ def test_config_font_annot():
 
 @pytest.mark.mpl_image_compare
 def test_config_format_time_map():
-    """
-    Test that setting `FORMAT_TIME_MAP` config changes both
-    `FORMAT_TIME_PRIMARY_MAP` and `FORMAT_TIME_SECONDARY_MAP`.
-    """
+    """Test that setting `FORMAT_TIME_MAP` config changes both
+    `FORMAT_TIME_PRIMARY_MAP` and `FORMAT_TIME_SECONDARY_MAP`."""
     fig = Figure()
     with config(FORMAT_TIME_MAP="abbreviation"):
         fig.basemap(
@@ -89,10 +83,8 @@ def test_config_format_time_map():
 
 @pytest.mark.mpl_image_compare
 def test_config_map_annot_offset():
-    """
-    Test that setting `MAP_ANNOT_OFFSET` config changes both
-    `MAP_ANNOT_OFFSET_PRIMARY` and `MAP_ANNOT_OFFSET_SECONDARY`.
-    """
+    """Test that setting `MAP_ANNOT_OFFSET` config changes both
+    `MAP_ANNOT_OFFSET_PRIMARY` and `MAP_ANNOT_OFFSET_SECONDARY`."""
     fig = Figure()
     with config(MAP_ANNOT_OFFSET="15p"):
         fig.basemap(
@@ -106,10 +98,8 @@ def test_config_map_annot_offset():
 
 @pytest.mark.mpl_image_compare
 def test_config_map_grid_cross_size():
-    """
-    Test that setting `MAP_GRID_CROSS_SIZE` config changes both
-    `MAP_GRID_CROSS_SIZE_PRIMARY` and `MAP_GRID_CROSS_SIZE_SECONDARY`.
-    """
+    """Test that setting `MAP_GRID_CROSS_SIZE` config changes both
+    `MAP_GRID_CROSS_SIZE_PRIMARY` and `MAP_GRID_CROSS_SIZE_SECONDARY`."""
     fig = Figure()
     with config(MAP_GRID_CROSS_SIZE="3p"):
         fig.basemap(
@@ -123,10 +113,8 @@ def test_config_map_grid_cross_size():
 
 @pytest.mark.mpl_image_compare
 def test_config_map_grid_pen():
-    """
-    Test that setting `MAP_GRID_PEN` config changes both
-    `MAP_GRID_PEN_PRIMARY` and `MAP_GRID_PEN_SECONDARY`.
-    """
+    """Test that setting `MAP_GRID_PEN` config changes both
+    `MAP_GRID_PEN_PRIMARY` and `MAP_GRID_PEN_SECONDARY`."""
     fig = Figure()
     with config(MAP_GRID_PEN="thick,red"):
         fig.basemap(
@@ -140,10 +128,8 @@ def test_config_map_grid_pen():
 
 @pytest.mark.mpl_image_compare
 def test_config_map_tick_length():
-    """
-    Test that setting `MAP_TICK_LENGTH` config changes both
-    `MAP_TICK_LENGTH_PRIMARY` and `MAP_TICK_LENGTH_SECONDARY`.
-    """
+    """Test that setting `MAP_TICK_LENGTH` config changes both
+    `MAP_TICK_LENGTH_PRIMARY` and `MAP_TICK_LENGTH_SECONDARY`."""
     fig = Figure()
     with config(MAP_TICK_LENGTH="5p"):
         fig.basemap(
@@ -157,10 +143,8 @@ def test_config_map_tick_length():
 
 @pytest.mark.mpl_image_compare
 def test_config_map_tick_pen():
-    """
-    Test that setting `MAP_TICK_PEN` config changes both
-    `MAP_TICK_PEN_PRIMARY` and `MAP_TICK_PEN_SECONDARY`.
-    """
+    """Test that setting `MAP_TICK_PEN` config changes both
+    `MAP_TICK_PEN_PRIMARY` and `MAP_TICK_PEN_SECONDARY`."""
     fig = Figure()
     with config(MAP_TICK_PEN="thick,red"):
         fig.basemap(

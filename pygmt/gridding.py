@@ -1,6 +1,4 @@
-"""
-GMT modules for Gridding of Data Tables
-"""
+"""GMT modules for Gridding of Data Tables."""
 import xarray as xr
 
 from .clib import Session

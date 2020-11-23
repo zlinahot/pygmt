@@ -1,6 +1,4 @@
-"""
-Build and install the project.
-"""
+"""Build and install the project."""
 from setuptools import setup, find_packages
 
 

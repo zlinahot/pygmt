@@ -1,6 +1,4 @@
-"""
-Tests for blockmedian
-"""
+"""Tests for blockmedian."""
 import os
 
 import numpy.testing as npt
@@ -14,9 +12,7 @@ from ..helpers import data_kind, GMTTempFile
 
 
 def test_blockmedian_input_dataframe():
-    """
-    Run blockmedian by passing in a pandas.DataFrame as input
-    """
+    """Run blockmedian by passing in a pandas.DataFrame as input."""
     dataframe = load_sample_bathymetry()
     output = blockmedian(table=dataframe, spacing="5m", region=[245, 255, 20, 30])
     assert isinstance(output, pd.DataFrame)
@@ -28,10 +24,8 @@ def test_blockmedian_input_dataframe():
 
 
 def test_blockmedian_wrong_kind_of_input_table_matrix():
-    """
-    Run blockmedian using table input that is not a pandas.DataFrame but still
-    a matrix
-    """
+    """Run blockmedian using table input that is not a pandas.DataFrame but
+    still a matrix."""
     dataframe = load_sample_bathymetry()
     invalid_table = dataframe.values
     assert data_kind(invalid_table) == "matrix"
@@ -40,10 +34,8 @@ def test_blockmedian_wrong_kind_of_input_table_matrix():
 
 
 def test_blockmedian_wrong_kind_of_input_table_grid():
-    """
-    Run blockmedian using table input that is not a pandas.DataFrame or file
-    but a grid
-    """
+    """Run blockmedian using table input that is not a pandas.DataFrame or file
+    but a grid."""
     dataframe = load_sample_bathymetry()
     invalid_table = dataframe.bathymetry.to_xarray()
     assert data_kind(invalid_table) == "grid"
@@ -52,9 +44,7 @@ def test_blockmedian_wrong_kind_of_input_table_grid():
 
 
 def test_blockmedian_input_filename():
-    """
-    Run blockmedian by passing in an ASCII text file as input
-    """
+    """Run blockmedian by passing in an ASCII text file as input."""
     with GMTTempFile() as tmpfile:
         output = blockmedian(
             table="@tut_ship.xyz",
@@ -72,8 +62,6 @@ def test_blockmedian_input_filename():
 
 
 def test_blockmedian_without_outfile_setting():
-    """
-    Run blockmedian by not passing in outfile parameter setting
-    """
+    """Run blockmedian by not passing in outfile parameter setting."""
     with pytest.raises(GMTInvalidInput):
         blockmedian(table="@tut_ship.xyz", spacing="5m", region=[245, 255, 20, 30])

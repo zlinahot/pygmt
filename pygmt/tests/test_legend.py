@@ -1,6 +1,4 @@
-"""
-Tests for legend
-"""
+"""Tests for legend."""
 import pytest
 
 from .. import Figure
@@ -11,9 +9,7 @@ from ..helpers.testing import check_figures_equal
 
 @pytest.mark.mpl_image_compare
 def test_legend_position():
-    """
-    Try positioning with each of the four legend coordinate systems.
-    """
+    """Try positioning with each of the four legend coordinate systems."""
 
     fig = Figure()
 
@@ -31,9 +27,7 @@ def test_legend_position():
 
 @pytest.mark.mpl_image_compare
 def test_legend_default_position():
-    """
-    Try using the default legend position.
-    """
+    """Try using the default legend position."""
 
     fig = Figure()
 
@@ -47,9 +41,7 @@ def test_legend_default_position():
 
 @check_figures_equal()
 def test_legend_entries():
-    """
-    Test different marker types/shapes.
-    """
+    """Test different marker types/shapes."""
     fig_ref, fig_test = Figure(), Figure()
 
     # Use single-character arguments for the reference image
@@ -85,9 +77,7 @@ def test_legend_entries():
 
 @pytest.mark.mpl_image_compare
 def test_legend_specfile():
-    """
-    Test specfile functionality.
-    """
+    """Test specfile functionality."""
 
     specfile_contents = """
 G -0.1i
@@ -130,9 +120,7 @@ T so we may have to adjust the box height to get the right size box.
 
 
 def test_legend_fails():
-    """
-    Test legend fails with invalid spec
-    """
+    """Test legend fails with invalid spec."""
     fig = Figure()
     with pytest.raises(GMTInvalidInput):
         fig.legend(spec=["@Table_5_11.txt"])

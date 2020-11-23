@@ -1,5 +1,6 @@
 """
 Base class with plot generating commands.
+
 Does not define any special non-GMT methods (savefig, show, etc).
 """
 import contextlib
@@ -51,7 +52,6 @@ class BasePlotting:
         >>> base = BasePlotting()
         >>> base._preprocess(resolution="low")
         {'resolution': 'low'}
-
         """
         return kwargs
 
@@ -78,7 +78,7 @@ class BasePlotting:
     @kwargs_to_strings(R="sequence", p="sequence")
     def coast(self, **kwargs):
         """
-        Plot continents, shorelines, rivers, and borders on maps
+        Plot continents, shorelines, rivers, and borders on maps.
 
         Plots grayshaded, colored, or textured land-masses [or water-masses] on
         maps and [optionally] draws coastlines, rivers, and political
@@ -138,7 +138,6 @@ class BasePlotting:
         {XY}
         {p}
         {t}
-
         """
         kwargs = self._preprocess(**kwargs)
         with Session() as lib:
@@ -224,7 +223,6 @@ class BasePlotting:
         {XY}
         {p}
         {t}
-
         """
         kwargs = self._preprocess(**kwargs)
         with Session() as lib:
@@ -253,7 +251,7 @@ class BasePlotting:
     @kwargs_to_strings(R="sequence", L="sequence", A="sequence_plus", p="sequence")
     def grdcontour(self, grid, **kwargs):
         """
-        Convert grids or images to contours and plot them on maps
+        Convert grids or images to contours and plot them on maps.
 
         Takes a grid file name or an xarray.DataArray object as input.
 
@@ -469,7 +467,6 @@ class BasePlotting:
         {p}
         {t}
         {x}
-
         """
         kwargs = self._preprocess(**kwargs)
         kind = data_kind(grid, None, None)
@@ -580,7 +577,6 @@ class BasePlotting:
         {XY}
         {p}
         {t}
-
         """
         kwargs = self._preprocess(**kwargs)
         kind = data_kind(grid, None, None)
@@ -778,7 +774,6 @@ class BasePlotting:
         {t}
             *transparency* can also be a 1d array to set varying transparency
             for symbols.
-
         """
         kwargs = self._preprocess(**kwargs)
 
@@ -851,7 +846,7 @@ class BasePlotting:
         self, x=None, y=None, z=None, data=None, sizes=None, direction=None, **kwargs
     ):
         """
-        Plot lines, polygons, and symbols in 3-D
+        Plot lines, polygons, and symbols in 3-D.
 
         Takes a matrix, (x,y,z) triplets, or a file name as input and plots
         lines, polygons, or symbols at those locations in 3-D.
@@ -961,7 +956,6 @@ class BasePlotting:
         {t}
             *transparency* can also be a 1d array to set varying transparency
             for symbols.
-
         """
         kwargs = self._preprocess(**kwargs)
 
@@ -1083,7 +1077,6 @@ class BasePlotting:
         {XY}
         {p}
         {t}
-
         """
         kwargs = self._preprocess(**kwargs)
 
@@ -1159,7 +1152,6 @@ class BasePlotting:
         {XY}
         {p}
         {t}
-
         """
         kwargs = self._preprocess(**kwargs)
         if not ("B" in kwargs or "L" in kwargs or "T" in kwargs):
@@ -1216,7 +1208,6 @@ class BasePlotting:
         {V}
         {XY}
         {t}
-
         """
         kwargs = self._preprocess(**kwargs)
         with Session() as lib:
@@ -1658,8 +1649,8 @@ class BasePlotting:
 
         def update_pointers(data_pointers):
             """Updates variables based on the location of data, as the
-            following data can be passed as parameters or it can be
-            contained in `spec`."""
+            following data can be passed as parameters or it can be contained
+            in `spec`."""
             # update all pointers
             longitude = data_pointers["longitude"]
             latitude = data_pointers["latitude"]
