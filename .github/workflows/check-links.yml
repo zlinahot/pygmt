@@ -28,9 +28,9 @@ jobs:
         path: documentation
 
     - name: Check links in plain-text and HTML files
-      uses: peter-evans/link-checker@v1
+      uses: peter-evans/link-checker@v1.2.2
       with:
-        args: -v -r repository/* documentation/dev/
+        args: -v -r repository/* documentation/dev/ -x https://forum.generic-mapping-tools.org
 
     - name: Show output
       run: cat link-checker/out.md
