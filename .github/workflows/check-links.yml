@@ -30,7 +30,10 @@ jobs:
     - name: Check links in plain-text and HTML files
       uses: peter-evans/link-checker@v1.2.2
       with:
-        args: -v -r repository/* documentation/dev/ -x https://forum.generic-mapping-tools.org
+        args: |
+          -v -r repository/* documentation/dev/ \
+          -x https://forum.generic-mapping-tools.org \
+          -x https://github.com/GenericMappingTools/pygmt
 
     - name: Show output
       run: cat link-checker/out.md
